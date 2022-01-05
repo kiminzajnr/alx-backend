@@ -35,7 +35,8 @@ def get_locale():
     if locale is not None and locale in app.config['LANGUAGES']:
         return locale
     login_as = request.args.get("login_as", None)
-    local_lang = users[int(login_as)]['locale']
+    if login_as is not None:
+        local_lang = users[int(login_as)]['locale']
     if login_as is not None and local_lang in app.config["LANGUAGES"]:
         return local_lang
     if request.headers.get('locale') in app.config['LANGUAGES']:
